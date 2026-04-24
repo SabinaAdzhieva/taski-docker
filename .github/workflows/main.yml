@@ -168,7 +168,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
-          key: ${{ secrets.KEY }}
+          key: ${{ secrets.SSH_KEY }}
           source: "docker-compose.production.yml"
           target: "taski"
       - name: Executing remote ssh commands to deploy
@@ -176,7 +176,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
+          key: ${{ secrets.SSH_KEY }}
           # Параметр script передаёт в action appleboy/ssh-action команды,
           # которые нужно выполнить на сервере, 
           # с которым установлено соединение
