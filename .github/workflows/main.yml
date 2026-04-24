@@ -160,11 +160,7 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-      - name: Debug key
-        run: |
-          echo "KEY LENGTH: ${#SSH_KEY}"
-        env:
-          SSH_KEY: ${{ secrets.SSH_KEY }}
+      
       # Копируем docker-compose.production.yml на продакшен-сервер
       - name: Copy docker-compose.yml via ssh
         uses: appleboy/scp-action@master
@@ -172,7 +168,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.KEY }}
           source: "docker-compose.production.yml"
           target: "taski"
       - name: Executing remote ssh commands to deploy
@@ -180,7 +176,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.KEY }}
           # Параметр script передаёт в action appleboy/ssh-action команды,
           # которые нужно выполнить на сервере, 
           # с которым установлено соединение
